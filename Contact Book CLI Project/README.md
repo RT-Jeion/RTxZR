@@ -1,8 +1,8 @@
-# Contact Book CLI Project – Full Plan
+# Contact Book CLI Project – One-Person Plan
 
 ## Project Overview
-A terminal-based contact manager where users can **add, view, search, update, and delete contacts**, with data stored in **JSON or CSV files**.  
-Practices **OOP, file handling, and modular coding**.  
+A terminal-based contact manager where a user can **add, view, search, update, and delete contacts**, with data stored in **JSON or CSV files**.  
+Practices **OOP, file handling, and modular coding**.
 
 ---
 
@@ -20,7 +20,7 @@ Practices **OOP, file handling, and modular coding**.
 - Optional enhancements:  
   - Sort contacts alphabetically  
   - Export contacts as TXT reports  
-  - Colored CLI for menus  
+  - Colored CLI for menus
 
 ---
 
@@ -40,66 +40,64 @@ Practices **OOP, file handling, and modular coding**.
 
 ---
 
-## 3. Task Division Between Members
+## 3. Step-by-Step Workflow for One Person
 
-### **Member 1: RT Jeion – Backend / Logic**
-**Responsibilities:**
-- Build `Contact` class  
-  - Fields: `name`, `phone`, `email`, `address`  
-  - Methods: `to_dict()` and `from_dict()` for saving/loading  
-- Build `ContactBook` class  
-  - Manage list of contacts  
-  - Features to implement:  
-    - `add_contact()`  
-    - `update_contact()`  
-    - `delete_contact()`  
-    - `search_contact()`  
-    - `save_to_file()` & `load_from_file()`  
-- Optional enhancements:  
-  - Sort contacts (`sort_contacts()`)  
-  - Handle exceptions for missing/corrupt files  
+### **Step 1: Setup**
+- Create folder with files:  
+  - `models.py` → `Contact` & `ContactBook` classes  
+  - `cli.py` → main menu and user interaction  
+  - `contacts.json` → data storage  
+- Import necessary modules: `json`, `os`, optionally `colorama` or `tabulate`  
 
-**Knowledge Needed:**  
-- Python OOP, classes & methods  
-- Lists, loops, conditionals  
-- JSON/CSV file handling  
+### **Step 2: Create `Contact` Class**
+- Fields: `name`, `phone`, `email`, `address`  
+- Methods: `to_dict()` for saving, `from_dict()` for loading  
 
----
+### **Step 3: Create `ContactBook` Class**
+- Field: list of `Contact` objects (`self.contacts`)  
+- Implement methods:  
+  - `add_contact()` → add contact to list  
+  - `update_contact()` → modify existing contact  
+  - `delete_contact()` → remove contact  
+  - `search_contact()` → search by name/phone/email  
+  - `view_contacts()` → display all contacts  
+  - `save_to_file()` & `load_from_file()` → handle JSON/CSV storage  
 
-### **Member 2: Zubair – CLI / User Interface**
-**Responsibilities:**
-- Build main CLI menu  
-  - Options: Add, View, Search, Update, Delete, Exit  
-- Handle user input & validation  
-  - Validate phone numbers, emails, and required fields  
-- Display contacts neatly  
-  - Pretty tables, headers, spacing  
-  - Optional: `tabulate` or colored output  
-- Integrate RT Jeion’s backend methods into menu options  
-- Optional enhancements:  
-  - Colored menus (`colorama`)  
-  - Export TXT reports  
+### **Step 4: Build CLI Menu**
+- Options: Add, View, Search, Update, Delete, Exit  
+- Loop menu until exit  
+- Validate input for all fields (phone, email, required fields)  
+- Connect menu options to `ContactBook` methods  
 
-**Knowledge Needed:**  
-- Loops, input(), string formatting  
-- Conditional checks  
-- Optional: Regex for validation, ANSI codes for colors  
+### **Step 5: File Handling**
+- On startup: call `load_from_file()`  
+- After every change: call `save_to_file()`  
+- Use `json.dump()` / `json.load()` for saving/loading  
+- Add exception handling for missing or corrupt files  
+
+### **Step 6: Optional Enhancements**
+- Sort contacts alphabetically (`sorted()` with lambda)  
+- Export contacts as TXT report (`open()` + string formatting)  
+- Add colored menus or outputs (`colorama` or ANSI codes)  
 
 ---
 
-## 4. Workflow & Collaboration
-1. **Step 1 – RT Jeion:** Build classes (`Contact` & `ContactBook`) with basic methods + file handling.  
-2. **Step 2 – Zubair:** Build CLI skeleton with menu options and dummy calls to methods.  
-3. **Step 3 – Integration:** Connect CLI menu options to RT Jeion’s methods and test CRUD operations.  
-4. **Step 4 – Optional Enhancements:**  
-   - Sorting (RT Jeion)  
-   - Colored CLI, TXT export (Zubair)  
-5. **Step 5 – Testing & Debugging:** Both test adding, searching, updating, deleting, and saving/loading contacts.  
+## 4. Module / Function Map
+
+| Task | Module / Function |
+|------|-----------------|
+| Save/load data | `json` or `csv`, `open()`, `json.dump()` / `json.load()` |
+| Menu and input | `input()`, `print()`, `while` loop |
+| Sorting contacts | `sorted()` with `lambda` |
+| Display table | Optional: `tabulate` module |
+| Colored CLI | Optional: `colorama` or ANSI codes |
+| Input validation | Loops, conditionals, optional `re` module for regex |
 
 ---
 
-## 5. Summary of Responsibilities
-| Member | Tasks |
-|--------|-------|
-| **RT Jeion** | Backend & logic: Classes, CRUD methods, file handling, optional sorting |
-| **Zubair** | CLI & UX: Menu, input validation, display, integration, optional colored output/TXT export |
+## 5. Summary Flow
+1. Build `Contact` class (data structure + methods)  
+2. Build `ContactBook` class (manage list + file handling)  
+3. Implement CLI menu (`cli.py`) with all options  
+4. Test adding, searching, updating, deleting, saving/loading  
+5. Add optional features: sorting, TXT export, colored CLI
