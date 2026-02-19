@@ -1,0 +1,26 @@
+[
+    {
+        "title": "atomic habits",
+        "author": "james clear",
+        "genre": "self help",
+        "is_available": true,
+        "borrower_name": null,
+        "borrow_date": null
+    },
+    {
+        "title": "dotcom secrets",
+        "author": "russell brunson",
+        "genre": "business",
+        "is_available": true,
+        "borrower_name": null,
+        "borrow_date": null
+    },
+    {
+        "title": "100m offers",
+        "author": "alex hormozi",
+        "genre": "business",
+        "is_available": true,
+        "borrower_name": null,
+        "borrow_date": null
+    }
+]
