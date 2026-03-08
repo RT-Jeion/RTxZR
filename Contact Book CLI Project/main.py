@@ -28,7 +28,7 @@ class Contact:
 
 class ContactBook:
     def __init__(self, name):
-        self.bookName = f"{name}.json"
+        self.bookName = f"storage/{name}.json"
 
 
     def load_from_files(self):
@@ -48,16 +48,13 @@ class ContactBook:
     
 
     def save_to_file(self, contacts_list):
-        if not contacts_list:
-            print("contacts Is Empty")
-            return
-
         with open(self.bookName, 'w', encoding='utf-8') as f:
             json.dump(contacts_list, f, indent=2)
             print(f"{len(contacts_list)} Contacts saved to {self.bookName}")
 
 
-    def add_contact(self,new_contact):
+    def add_contact(self,contact):
+        new_contact = contact.to_dict()
         name = new_contact.get("Name")
         phone = new_contact.get("Phone")
         email = new_contact.get("Email")
@@ -161,16 +158,14 @@ if __name__ == "__main__":
         "adress": "Gazipur"
     }
 
-    cont2 = {
-        "name": input("Name: "),
-        "phone": input("Phone: "),
-        "email": input("Email: "),
-        "adress": input("Adress: ")
-    }
+
     contact1 = Contact("RT Jeion", "019000000", "rt.jeion@gmail.com", "Gazipur, Dhaka")
     contact2 = Contact.from_dict(cont1)
     contact3 = Contact("RT Jeion", "019000012", "rt.jeion@gmail.com", "Gazipur, Dhaka")
-    contact4 = Contact.from_dict(cont2)
+    
+    book.add_contact(contact1)
+    book.add_contact(contact2)
+    book.add_contact(contact3)
+    
 
-    book.search_contact("Name", "RT Jeion")
-    book.add_contact(contact4.to_dict())
+    
