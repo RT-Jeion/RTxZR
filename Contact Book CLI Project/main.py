@@ -128,7 +128,7 @@ class ContactBook:
             if name == contacts[i]["Name"] and number == contacts[i]["Phone"]:
                 old_value = contacts[i][keyword]
                 contacts[i][keyword] = new_value
-
+                self.save_to_file(contacts)
                 print(f'{keyword} modified of Name: {contacts[i]["Name"]}\nPhone: {contacts[i]["Phone"]}')
                 print(f"Modified: {old_value} --> {new_value}")
                 return
@@ -163,9 +163,6 @@ if __name__ == "__main__":
     contact2 = Contact.from_dict(cont1)
     contact3 = Contact("RT Jeion", "019000012", "rt.jeion@gmail.com", "Gazipur, Dhaka")
     
-    book.add_contact(contact1)
-    book.add_contact(contact2)
-    book.add_contact(contact3)
-    
+    book.modify_contact("Rejuwan", "0190000", "Email", "roronoa.rt")
 
     
